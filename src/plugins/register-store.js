@@ -17,6 +17,21 @@ const mutations = {
 		if (singleField.accros) {
 			state.accros.push(singleField.key);
 		}
+		const fields = [];
+		state.fields.data.forEach((fieldSet) => {
+			fields.push({
+				name: fieldSet.key,
+				item: 'fieldset',
+			});
+			fieldSet.data.forEach((field) => {
+				fields.push({
+					name: field.key,
+					item: 'field',
+					value: field.value
+			});
+		});
+		state.mappedFields = fields;
+				
 	},
 	updateFieldValue(state, options) {
 		if (options.fieldSet) {
