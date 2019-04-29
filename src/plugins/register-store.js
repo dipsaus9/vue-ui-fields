@@ -25,7 +25,7 @@ const mutations = {
 			});
 			fieldSet.data.forEach((field) => {
 				fields.push({
-					name: field.key,
+					name: field.name,
 					item: 'field',
 					value: field.value
 				});
