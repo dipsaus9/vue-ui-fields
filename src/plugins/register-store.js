@@ -28,10 +28,10 @@ const mutations = {
 					name: field.key,
 					item: 'field',
 					value: field.value
+				});
 			});
 		});
 		state.mappedFields = fields;
-
 	},
 	updateFieldValue(state, options) {
 		if (options.fieldSet) {
