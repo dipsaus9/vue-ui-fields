@@ -31,7 +31,7 @@ const mutations = {
 			});
 		});
 		state.mappedFields = fields;
-				
+
 	},
 	updateFieldValue(state, options) {
 		if (options.fieldSet) {
@@ -187,7 +187,8 @@ export default async ({ store }) => {
 			namespaced: true,
 			state: () => ({
 				fields: [],
-				accros: []
+				accros: [],
+				mappedFields: []
 			}),
 			actions: actions,
 			mutations: mutations
