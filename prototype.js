@@ -174,6 +174,7 @@ export default function(options, Vue) {
 				return;
 			}
 			form.setValue(name, value, checkError);
+
 			if (checkError) {
 				this.removeCustomErrors(formName, name);
 				this.checkError(formName, name, value);
@@ -206,10 +207,12 @@ export default function(options, Vue) {
 		_subscribeError(name, data) {
 			if (this.errorListeners.has(name)) {
 				const oldError = this.errorListeners.get(name);
-				this.errorListeners.set(name, {
-					functions: oldError.functions,
-					data: [...oldError.data, data],
-				});
+				if(oldError) {
+					this.errorListeners.set(name, {
+						functions: oldError.functions,
+						data: [...oldError.data, data],
+					});
+				}
 			} else {
 				this.errorListeners.set(name, { functions: [], data: [data] });
 			}
@@ -236,6 +239,7 @@ export default function(options, Vue) {
 		subscribeError(formName, fieldName, listener) {
 			if (this.errorListeners.has(`${formName}_${fieldName}`)) {
 				const error = this.errorListeners.get(`${formName}_${fieldName}`);
+				// console.log(error);
 				error.functions.push(listener);
 				this.errorListeners.set(`${formName}_${fieldName}`, error);
 			}
@@ -306,7 +310,7 @@ export default function(options, Vue) {
 		 */
 		checkError(formName, fieldName, value) {
 			//Field event
-			if (this.errorListeners.has(`${formName}_${fieldName}`)) {
+				if (this.errorListeners.has(`${formName}_${fieldName}`)) {
 				const fieldEvents = this.errorListeners.get(`${formName}_${fieldName}`);
 				const result = fieldEvents.data
 					.map((event) => {
@@ -316,7 +320,7 @@ export default function(options, Vue) {
 								formName,
 								fieldName,
 								event.validationType,
-								event.message
+								event.message()
 							);
 						} else {
 							this.removeError(formName, fieldName, event.validationType);
@@ -345,7 +349,6 @@ export default function(options, Vue) {
 			if (!formName || !fieldName || !errorName) {
 				return;
 			}
-
 			const form = this.getForm(formName);
 			if (!form) {
 				console.log('No form found');
@@ -371,6 +374,7 @@ export default function(options, Vue) {
 				console.log('No form found');
 				return;
 			}
+
 			this._subscribeError(`${formName}_${fieldName}`, {
 				custom: true,
 				validation: () => false,
