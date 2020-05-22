@@ -569,8 +569,8 @@ export default function(options, Vue) {
 		 * @param {...any} args 
 		 * @param required {String} depFormName
 		 * @param required {String} depFieldName
-		 * @param required {String} formName
 		 * @param required {String, Function} valueFunction
+		 * @param required {String} formName
 		 * @param optional {String, Array} fields
 		 */
 		setCondition(...args) {
@@ -590,9 +590,14 @@ export default function(options, Vue) {
 			// If the type of variable valuefunction is a string then make a function of this string
 			if (typeof valueFunction === 'string') {
 				const val = valueFunction;
-				valueFunction = (value) => val === value
+				valueFunction = (value) => {
+					if(Array.isArray(value)) {
+						return value.includes(val);
+					} else {
+						return val === value;
+					}
+				}
 			}
-			
 			if (!Array.isArray(fieldName)) {
 				fieldName = [fieldName]
 			}
