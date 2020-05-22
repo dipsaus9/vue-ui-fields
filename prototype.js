@@ -569,8 +569,8 @@ export default function(options, Vue) {
 		 * @param {...any} args 
 		 * @param required {String} depFormName
 		 * @param required {String} depFieldName
-		 * @param required {String, Function} valueFunction
 		 * @param required {String} formName
+		 * @param required {String, Function} valueFunction
 		 * @param optional {String, Array} fields
 		 */
 		setCondition(...args) {
@@ -590,14 +590,9 @@ export default function(options, Vue) {
 			// If the type of variable valuefunction is a string then make a function of this string
 			if (typeof valueFunction === 'string') {
 				const val = valueFunction;
-				valueFunction = (value) => {
-					if(Array.isArray(value)) {
-						return value.includes(val);
-					} else {
-						return val === value;
-					}
-				}
+				valueFunction = (value) => val === value
 			}
+			
 			if (!Array.isArray(fieldName)) {
 				fieldName = [fieldName]
 			}
@@ -651,7 +646,7 @@ export default function(options, Vue) {
 		 * @param required {String} formName - name of form from condition
 		 * @param optional {Array, String} fieldName - name of field from condition
 		 */
-		removeCondition(formName, fieldName) {
+		unsubscribeCondition(formName, fieldName) {
 			// Check if fieldName is empty, if it is empty make an empty string 
 			if (!fieldName) {
 				fieldName = '';
@@ -724,7 +719,7 @@ export default function(options, Vue) {
 				}
 			},
 			async new(formID) {
-				const URL = `${options.baseURL}/wp-json/matise/utilities/gfapi/${formID}?path=${window.location.pathname}`;
+				let URL = `${options.baseURL}/wp-json/matise/utilities/gfapi/${formID}?path=${window.location.pathname}`;
 				if (window.location.search.substr(1)) {
 					URL += `&${window.location.search.substr(1)}`;
 				}

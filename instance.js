@@ -76,17 +76,18 @@ export default (options, Vue) => {
 
 			const defaultHTMLSettings = [
 				{ key: 'autocomplete', type: 'string' },
-				{ key: 'accept', type: 'string', default: '*' },
+				{ key: 'accept', type: 'string' },
 				{ key: 'disabled', type: 'boolean' },
-				{ key: 'max', type: 'number' },
-				{ key: 'maxlength', type: 'number' },
-				{ key: 'min', type: 'number' },
-				{ key: 'minlength', type: 'number' },
+				{ key: 'max', type: 'any' },
+				{ key: 'maxlength', type: 'any' },
+				{ key: 'min', type: 'any' },
+				{ key: 'minlength', type: 'any' },
 				{ key: 'multiple', type: 'boolean' },
 				{ key: 'placeholder', type: 'string' },
 				{ key: 'required', type: 'boolean' },
 				{ key: 'step', type: 'number' },
 				{ key: 'autofocus', type: 'boolean' },
+				{ key: 'maxUploadSize', type: 'number' }
 			];
 
 			const defaultOptionsSettings = [
