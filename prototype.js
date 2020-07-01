@@ -659,15 +659,16 @@ export default function(options, Vue) {
 		},
 
 		gfapi: {
-			async submit(formID) {
+			async submit(formID, responseType = 'default') {
 				const result = Vue.prototype.$uiFields.validate(formID);
 				if (result.valid) {
 					const form = Vue.prototype.$uiFields.getForm(formID);
 					if (!form) {
+						console.log('No form found');
 						return;
 					}
 					if (form.includesFile) {
-						return this.submitFiles(formID, form);
+						return this.submitFiles(formID, form, responseType);
 					}
 
 
@@ -681,10 +682,10 @@ export default function(options, Vue) {
 							body: JSON.stringify(data),
 						}
 					).then((response) => response.json());
-					return this.handleFormSubmission(response);
+					return this.handleFormSubmission(response, responseType);
 				}
 			},
-			async submitFiles(formID, form) {
+			async submitFiles(formID, form, responseType) {
 				const data = Vue.prototype.$uiFields.getFormattedValues(String(formID));
 				const formData = new FormData();
 
@@ -705,16 +706,20 @@ export default function(options, Vue) {
 					method: 'POST', // *GET, POST, PUT, DELETE, etc.
 					body: formData
 				}).then((response) => response.json());
-				return this.handleFormSubmission(response);
+				return this.handleFormSubmission(response, responseType);
 			},
-			handleFormSubmission(response) {
+			handleFormSubmission(response, responseType) {
 				if (response && response.is_valid) {
 					switch (response.confirmation_type) {
 						case 'redirect':
 							window.location = response.confirmation_redirect;
 							break;
 						case 'message':
-							return response.confirmation_message;
+							if(responseType === 'raw'){
+								return response;
+							} else {
+								return response.confirmation_message;
+							}
 					}
 				}
 			},
