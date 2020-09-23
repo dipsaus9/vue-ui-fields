@@ -7,11 +7,14 @@
 	"scripts": {
 		"lint": "eslint src",
 		"dev": "vue-cli-service serve dev/main.ts",
+		"build": "npm run build:test",
 		"dokkie": "npx dokkie",
 		"lint:fix": "eslint src --fix",
-		"build": "tsc"
+		"build:vue": "cp -R ./src/template ./dist/template",
+		"build:test": "vue-cli-service build",
+		"build:tsc": "tsc"
 	},
-	"main": "./src/index.ts",
+	"main": "./dist/index.js",
 	"dependencies": {
 		"simple-crypto-js": "^2.2.0",
 		"validator": "^13.0.0",
@@ -34,6 +37,7 @@
 		"eslint-config-prettier": "^6.11.0",
 		"eslint-plugin-prettier": "^3.1.4",
 		"eslint-plugin-vue": "^6.2.2",
+		"glob": "^7.1.6",
 		"prettier": "^2.0.5",
 		"typescript": "~3.9.3",
 		"vue": "^2.6.11",

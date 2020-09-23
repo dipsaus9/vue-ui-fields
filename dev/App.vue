@@ -1,40 +1,50 @@
 <template>
 	<div id="app">
 		<UiFields name="checkout" />
+		<input type="text" v-model="test" />
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'App',
-	created() {
-		this.$uiFields.new('checkout');
-		this.$uiFields.setFields('checkout', [
-			{
-				name: 'optional_value',
-				type: 'checkbox',
-				options: [
-					{
-						value: 'true',
-						label: 'Do you want to ship your order to a different address?',
-					},
-				],
-			},
-			{
-				name: 'shipping_address',
-				label: 'Address',
-				validation: [
-					{
-						name: 'required',
-					},
-				],
-			},
-		]);
+	data: () => ({
+		test: '',
+	}),
+	uiFields: {
+		optional_value: {
+			type: 'checkbox',
+			options: [
+				{
+					value: 'true',
+					label: 'Do you want to ship your order to a different address?',
+				},
+			],
+			validation: [
+				{
+					name: 'required',
+					message: 'This is required',
+				},
+			],
+		},
+		shipping_address: {
+			label: 'Address',
+			validation: [
+				{
+					name: 'custom',
+					options: 'UiFields is awesome',
+					message: 'Is not matching the validation',
+					validation: (value, option) => value.toLowerCase() === option.toLowerCase(),
+				},
+			],
+		},
+	},
 
+	created() {
 		this.$uiFields.setCondition(
 			'checkout',
 			'optional_value',
-			(val) => {
+			async (val) => {
 				if (Array.isArray(val)) {
 					return val.includes('true');
 				}

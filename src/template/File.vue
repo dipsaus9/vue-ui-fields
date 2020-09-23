@@ -45,17 +45,17 @@ import UIFieldsMixin from '../helpers/mixin';
 @Component
 export default class UiFile extends mixins(UIFieldsMixin) {
 	public component: string = 'ui-file';
-public pristine: boolean = true;
-			public fileName: string = '',
-			public size: number = 0;
+	public pristine: boolean = true;
+	public fileName: string = '';
+	public size: number = 0;
 	get className() {
 		return this.$uiFields.getClassName(this.form);
 	}
 	onFileChange(event: any) {
-			this.size = Math.round(event.target.files[0].size / 1000);
-			this.pristine = false;
-			this.fileName = event.target.files[0].name;
-			this.$uiFields.setValue(this.form, this.name, event.target.files[0]);
-		}
+		this.size = Math.round(event.target.files[0].size / 1000);
+		this.pristine = false;
+		this.fileName = event.target.files[0].name;
+		this.$uiFields.setValue(this.form, this.name, event.target.files[0]);
+	}
 }
 </script>
