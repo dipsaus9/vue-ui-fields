@@ -1,7 +1,6 @@
 <template>
 	<div id="app">
 		<UiFields name="checkout" />
-		<input type="text" v-model="test" />
 	</div>
 </template>
 
@@ -18,12 +17,6 @@ export default {
 				{
 					value: 'true',
 					label: 'Do you want to ship your order to a different address?',
-				},
-			],
-			validation: [
-				{
-					name: 'required',
-					message: 'This is required',
 				},
 			],
 		},
@@ -44,7 +37,7 @@ export default {
 		this.$uiFields.setCondition(
 			'checkout',
 			'optional_value',
-			async (val) => {
+			(val) => {
 				if (Array.isArray(val)) {
 					return val.includes('true');
 				}

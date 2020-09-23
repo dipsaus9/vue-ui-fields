@@ -48,7 +48,7 @@ export default class Fields extends Vue {
 			this.pristine = false;
 			this.error = errorObject.valid;
 		});
-		this.$uiFields.subscribeCondition(`${this.form}_${this.name}`, (result) => (this.visible = result));
+		this.$uiFields.subscribeCondition(`${this.form}_${this.name}`, async (result) => (this.visible = await result));
 	}
 }
 </script>
