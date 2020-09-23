@@ -16,7 +16,7 @@ export default class UiErrors extends Vue {
 
 	public errors: FieldError[] = [];
 	created() {
-		this.$uiFields.subscribeError(this.form, this.name, (value, errors: FieldError[]) => {
+		this.$uiFields.subscribeError(this.form, this.name, (value: any, errors: FieldError[]) => {
 			errors = errors.filter((error) => !error.valid);
 			this.errors = errors;
 			if (errors.length && errors[0].name == 'required') {

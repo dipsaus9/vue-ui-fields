@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import type { FieldError } from '../types/index';
 
 @Component({
 	components: {
@@ -44,11 +45,14 @@ export default class Fields extends Vue {
 		return this.$uiFields.getField(this.form, this.name);
 	}
 	created() {
-		this.$uiFields.subscribeError(this.form, this.name, (value, errorObject) => {
+		this.$uiFields.subscribeError(this.form, this.name, (value: any, errorObject: FieldError) => {
 			this.pristine = false;
 			this.error = errorObject.valid;
 		});
-		this.$uiFields.subscribeCondition(`${this.form}_${this.name}`, async (result) => (this.visible = await result));
+		this.$uiFields.subscribeCondition(
+			`${this.form}_${this.name}`,
+			async (result: any) => (this.visible = await result)
+		);
 	}
 }
 </script>
