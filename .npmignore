@@ -1,11 +1,11 @@
-# Dependencies
 node_modules
-
-# Logs
-npm-debug.log
-
-# Editors
+*.iml
+.idea
+*.log*
+.nuxt*
 .vscode
-
-.git
-.gitignore
+.DS_Store
+coverage
+dist
+sw.*
+.env
