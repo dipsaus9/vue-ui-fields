@@ -9,6 +9,8 @@
 		"noImplicitThis": true,
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
+		"esModuleInterop": true,
+		"downlevelIteration": true,
 		"noEmit": true,
 		"forceConsistentCasingInFileNames": true
 	},

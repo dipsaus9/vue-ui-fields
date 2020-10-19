@@ -1,3 +1,5 @@
+import ProviderComponent from '../src/provider';
+
 declare module '@vue-ui-fields/core' {
-	function test(): void;
+	const UIFieldsProvider: typeof ProviderComponent;
 }

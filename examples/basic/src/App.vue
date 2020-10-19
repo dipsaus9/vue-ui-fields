@@ -1,12 +1,21 @@
 <template>
-	<h1>Hello world</h1>
+	<UIFieldsProvider>
+		<Form />
+	</UIFieldsProvider>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { UIFieldsProvider } from '@vue-ui-fields/core';
+
+import Form from './components/form.vue';
 
 export default defineComponent({
-	name: 'App'
+	name: 'App',
+	components: {
+		UIFieldsProvider,
+		Form
+	}
 });
 </script>
 
