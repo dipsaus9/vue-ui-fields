@@ -1,0 +1,24 @@
+{
+	"name": "@vue-ui-fields/core",
+	"version": "0.0.1",
+	"description": "Core of UI Fields",
+	"author": "Dennis <dennis.spierenburg@hotmail.com>",
+	"homepage": "https://github.com/dipsaus9/vue-ui-fields#readme",
+	"license": "ISC",
+	"main": "dist/index.js",
+	"types": "./types/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dipsaus9/vue-ui-fields.git"
+	},
+	"scripts": {
+		"dev": "tsc-watch ./src/index.ts --outDir ./dist",
+		"build": "tsc ./src --outDir ./dist"
+	},
+	"bugs": {
+		"url": "https://github.com/dipsaus9/vue-ui-fields/issues"
+	}
+}

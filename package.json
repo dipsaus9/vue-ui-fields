@@ -1,12 +1,17 @@
 {
 	"name": "vue-ui-fields-workspace",
 	"private": true,
+	"version": "1.0.0",
 	"description": "Vue component library to create forms",
 	"author": "dipsaus9",
 	"workspaces": [
-		"packages/*"
+		"packages/*",
+		"examples/*"
 	],
 	"scripts": {
+		"serve:basic": "npm run serve --prefix examples/basic",
+		"dev": "lerna run dev",
+		"build": "lerna run build",
 		"test": "echo test"
 	},
 	"repository": {
@@ -15,5 +20,8 @@
 	},
 	"devDependencies": {
 		"lerna": "^3.22.1"
+	},
+	"dependencies": {
+		"tsc-watch": "^4.2.9"
 	}
 }
