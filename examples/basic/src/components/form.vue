@@ -1,17 +1,19 @@
 <template>
 	<form>
 		Hoi
+		<pre>{{ value }}</pre>
 	</form>
 </template>
 
 <script lang="ts">
-import { inject } from 'vue';
+import { getValue } from '@vue-ui-fields/core';
+
 export default {
 	setup() {
-		const uiFields = inject('getUIFieldsValues');
+		const value = getValue('test');
 
 		return {
-			uiFields
+			value
 		};
 	}
 };

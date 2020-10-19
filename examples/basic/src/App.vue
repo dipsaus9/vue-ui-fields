@@ -13,7 +13,7 @@ import Form from './components/form.vue';
 export default defineComponent({
 	name: 'App',
 	components: {
-		UIFieldsProvider,
+		UIFieldsProvider: UIFieldsProvider,
 		Form
 	}
 });

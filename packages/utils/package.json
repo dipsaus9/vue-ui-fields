@@ -1,5 +1,5 @@
 {
-	"name": "@vue-ui-fields/core",
+	"name": "@vue-ui-fields/utils",
 	"version": "0.0.1",
 	"description": "Core of UI Fields",
 	"author": "Dennis <dennis.spierenburg@hotmail.com>",
@@ -10,16 +10,13 @@
 	"files": [
 		"dist"
 	],
-	"dependencies": {
-		"@vue-ui-fields/utils": "0.0.1"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/dipsaus9/vue-ui-fields.git"
 	},
 	"scripts": {
-		"dev": "tsc-watch --p ./src/index.ts --outDir ./dist",
-		"build": "tsc --p ./src/index.ts --outDir ./dist"
+		"dev": "tsc-watch -p ./src/index.ts --outDir ./dist",
+		"build": "tsc ./src/index.ts --outDir ./dist"
 	},
 	"bugs": {
 		"url": "https://github.com/dipsaus9/vue-ui-fields/issues"

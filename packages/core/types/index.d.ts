@@ -1,5 +1,5 @@
-import ProviderComponent from '../src/provider';
+import UIFieldsProvider from '../src/index';
 
-declare module '@vue-ui-fields/core' {
-	const UIFieldsProvider: typeof ProviderComponent;
-}
+export * from '@vue-ui-fields/utils';
+
+export { UIFieldsProvider };
