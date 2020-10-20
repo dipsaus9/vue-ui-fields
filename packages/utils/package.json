@@ -6,7 +6,7 @@
 	"homepage": "https://github.com/dipsaus9/vue-ui-fields#readme",
 	"license": "ISC",
 	"main": "dist/index.js",
-	"types": "./types/index.d.ts",
+	"types": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
@@ -15,10 +15,20 @@
 		"url": "git+https://github.com/dipsaus9/vue-ui-fields.git"
 	},
 	"scripts": {
-		"dev": "tsc-watch -p ./src/index.ts --outDir ./dist",
-		"build": "tsc ./src/index.ts --outDir ./dist"
+		"build": "yarn run clean && yarn run compile",
+		"clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+		"compile": "tsc",
+		"prepublishOnly": "npm run build",
+		"dev": "yarn run clean && tsc --watch"
 	},
 	"bugs": {
 		"url": "https://github.com/dipsaus9/vue-ui-fields/issues"
+	},
+	"dependencies": {
+		"@vue-ui-fields/core": "0.0.1"
+	},
+	"devDependencies": {
+		"typescript": "^4.0.3",
+		"vue": "3.0.1"
 	}
 }

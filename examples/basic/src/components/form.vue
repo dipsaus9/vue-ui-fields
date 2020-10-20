@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { getValue } from '@vue-ui-fields/core';
+import { getValue } from '@vue-ui-fields/utils';
 
 export default {
 	setup() {

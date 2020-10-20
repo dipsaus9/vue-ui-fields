@@ -1,4 +1,4 @@
-import { defineComponent, provide, reactive, computed } from 'vue';
+import { defineComponent, provide, reactive, computed, ComputedRef } from 'vue';
 
 function activateMask(newValue: string, masks: ((value: string) => string)[]): string {
 	let value = newValue;
@@ -8,25 +8,39 @@ function activateMask(newValue: string, masks: ((value: string) => string)[]): s
 	return value;
 }
 
+export const getUIFieldsSymbol = Symbol('UIFields');
+export const getValueSymbol = Symbol('UIFieldsGetValue');
+export const getValuesSymbol = Symbol('UIFieldsGetValue');
+
+export interface UIFieldsGetValue {
+	(key: string): ComputedRef;
+}
+
+
 const UIFieldsProvider = defineComponent({
 	render() {
 		if (!this.$slots.default) return;
 		return this.$slots.default();
 	},
 	setup() {
-		console.log('hallo?');
 		const uiFields = reactive(new Map());
 
-		const getValue = (key: string) => computed(() => uiFields.get(key));
+		const getValue: UIFieldsGetValue = (key: string) => computed(() => uiFields.get(key));
+		provide(getValueSymbol, getValue); // Single value
 
-		const getValues = computed(() => [...uiFields.values()]);
 
 		const setValue = (name: string, masks: ((value: string) => string)[] = []) => (newVal: string) => {
 			const value = activateMask(newVal, masks);
 			uiFields.set(name, value);
 		};
+		provide('setUIFieldsValue', setValue);
 
-		const computedValue = (name: string, hooks: ((value: string) => string)[] = [], initialValue: string = '') => {
+
+		const getValues = computed(() => [...uiFields.values()]);
+
+
+
+		const computedValue = (name: string, hooks: ((value: string) => string)[] = [], initialValue = '') => {
 			if (initialValue) {
 				const val = activateMask(initialValue, hooks);
 				uiFields.set(name, val);
@@ -37,19 +51,14 @@ const UIFieldsProvider = defineComponent({
 			});
 		};
 
-		setValue('test')('hallo');
-		console.log(uiFields);
+		provide(getUIFieldsSymbol, uiFields); // Full Map
+		provide(getValuesSymbol, getValues); // All values in array
 
-		provide('getUIFields', uiFields);
 
-		provide('getUIFieldsValue', getValue);
-		provide('setUIFieldsValue', setValue);
-
-		provide('getUIFieldsValues', getValues);
 		provide('UIFieldsValue', computedValue);
+
+		setValue('test')('hallo');
 	}
 });
 
 export { UIFieldsProvider };
-
-export * from '@vue-ui-fields/utils';

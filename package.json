@@ -10,7 +10,7 @@
 	],
 	"scripts": {
 		"serve:basic": "npm run serve --prefix examples/basic",
-		"dev": "lerna run dev",
+		"dev": "lerna run --parallel dev",
 		"build": "lerna run build",
 		"test": "echo test"
 	},
@@ -19,10 +19,13 @@
 		"url": "https://github.com/dipsaus9/vue-ui-fields.git"
 	},
 	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.5.0",
+		"@typescript-eslint/parser": "^4.5.0",
+		"eslint": "^7.11.0",
 		"lerna": "^3.22.1",
+		"tsc": "^1.20150623.0",
+		"tsc-watch": "^4.2.9",
 		"typescript": "^4.0.3"
 	},
-	"dependencies": {
-		"tsc-watch": "^4.2.9"
-	}
+	"dependencies": {}
 }

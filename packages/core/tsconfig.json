@@ -1,6 +1,14 @@
 {
 	"extends": "../../tsconfig.json",
-	"files": [
-		"types/index.d.ts"
-	],
+	"compilerOptions": {
+		"target": "esnext",
+		"moduleResolution": "node",
+		"composite": true,
+		"declaration": true,
+		"outDir": "./dist",
+		"rootDir": "./src"
+	},
+	"include": [
+		"src/**/*"
+	]
 }

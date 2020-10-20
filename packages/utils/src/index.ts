@@ -1,11 +1,15 @@
 import { inject } from 'vue';
+import { getValueSymbol } from '@vue-ui-fields/core';
 
-const getValue = (key: string) => {
-	const getter = inject('getUIFieldsValue');
+import type { ComputedRef } from 'vue';
+import type { UIFieldsGetValue } from '@vue-ui-fields/core';
 
-	// if (getter) return getter(key);
+const getValue = (key: string): ComputedRef | null => {
+	const getter = inject<UIFieldsGetValue>(getValueSymbol);
 
-	return getter;
+	if (!getter) return null;
+
+	return getter(key)
 };
 
 export { getValue };
