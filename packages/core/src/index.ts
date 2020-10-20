@@ -1,20 +1,14 @@
-import { defineComponent, provide, reactive, computed, ComputedRef } from 'vue';
+import { defineComponent, provide, reactive, computed } from 'vue';
+import { activateMask } from '@vue-ui-fields/utils';
 
-function activateMask(newValue: string, masks: ((value: string) => string)[]): string {
-	let value = newValue;
-	masks.forEach((mask) => {
-		value = mask(newValue);
-	});
-	return value;
-}
+import type { MaskFunction, IGetValueProvider, ISetValueProvider } from '../types/index';
 
 export const getUIFieldsSymbol = Symbol('UIFields');
 export const getValueSymbol = Symbol('UIFieldsGetValue');
+export const getComputedSymbol = Symbol('UIFieldsGetComputed');
 export const getValuesSymbol = Symbol('UIFieldsGetValue');
 
-export interface UIFieldsGetValue {
-	(key: string): ComputedRef;
-}
+export const setValueSymbol = Symbol('UIFieldsSetValue');
 
 
 const UIFieldsProvider = defineComponent({
@@ -25,19 +19,19 @@ const UIFieldsProvider = defineComponent({
 	setup() {
 		const uiFields = reactive(new Map());
 
-		const getValue: UIFieldsGetValue = (key: string) => computed(() => uiFields.get(key));
-		provide(getValueSymbol, getValue); // Single value
+		const getValueProvider: IGetValueProvider = (key: string) => computed(() => uiFields.get(key));
+		provide(getValueSymbol, getValueProvider); // Single value getter
 
 
-		const setValue = (name: string, masks: ((value: string) => string)[] = []) => (newVal: string) => {
+		const setValueProvider: ISetValueProvider = (name: string, masks: MaskFunction[] = []) => (newVal: string) => {
 			const value = activateMask(newVal, masks);
 			uiFields.set(name, value);
 		};
-		provide('setUIFieldsValue', setValue);
+		provide(setValueSymbol, setValueProvider); // Single setter
 
 
-		const getValues = computed(() => [...uiFields.values()]);
-
+		const getValuesProvider = computed(() => [...uiFields.values()]);
+		provide(getValuesSymbol, getValuesProvider); // All values in array
 
 
 		const computedValue = (name: string, hooks: ((value: string) => string)[] = [], initialValue = '') => {
@@ -47,17 +41,13 @@ const UIFieldsProvider = defineComponent({
 			}
 			return computed({
 				get: () => uiFields.get(name),
-				set: setValue(name, hooks)
+				set: setValueProvider(name, hooks)
 			});
 		};
+		provide(getComputedSymbol, computedValue); // Full computed version with setter
 
 		provide(getUIFieldsSymbol, uiFields); // Full Map
-		provide(getValuesSymbol, getValues); // All values in array
 
-
-		provide('UIFieldsValue', computedValue);
-
-		setValue('test')('hallo');
 	}
 });
 

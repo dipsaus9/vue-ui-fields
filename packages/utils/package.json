@@ -19,7 +19,7 @@
 		"clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
 		"compile": "tsc",
 		"prepublishOnly": "npm run build",
-		"dev": "yarn run clean && tsc --watch"
+		"dev": "tsc --watch"
 	},
 	"bugs": {
 		"url": "https://github.com/dipsaus9/vue-ui-fields/issues"
