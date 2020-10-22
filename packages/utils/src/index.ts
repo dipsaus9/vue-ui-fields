@@ -1,8 +1,8 @@
 import { inject } from 'vue';
-import { getValueSymbol, setValueSymbol } from '@vue-ui-fields/core';
+import { getValueSymbol, setValueSymbol } from '@vue-ui-fields/provider';
 
 import type { ComputedRef } from 'vue';
-import type { IGetValueProvider, ISetValue, ISetValueProvider, MaskFunction } from '@vue-ui-fields/core/types';
+import type { IGetValueProvider, ISetValue, ISetValueProvider, MaskFunction } from '@vue-ui-fields/provider/types';
 
 const getValue = (key: string): ComputedRef | null => {
 	const getter = inject<IGetValueProvider>(getValueSymbol);

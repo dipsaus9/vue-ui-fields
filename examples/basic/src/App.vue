@@ -1,19 +1,19 @@
 <template>
-	<UIFieldsProvider>
+	<Provider>
 		<Form />
-	</UIFieldsProvider>
+	</Provider>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { UIFieldsProvider } from '@vue-ui-fields/core';
+import { Provider } from 'vue-ui-fields';
 
 import Form from './components/form.vue';
 
 export default defineComponent({
 	name: 'App',
 	components: {
-		UIFieldsProvider: UIFieldsProvider,
+		Provider,
 		Form
 	}
 });

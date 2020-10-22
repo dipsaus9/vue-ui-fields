@@ -6,6 +6,7 @@
 	"author": "dipsaus9",
 	"workspaces": [
 		"packages/*",
+		"distributions/*",
 		"examples/*"
 	],
 	"scripts": {
@@ -21,6 +22,7 @@
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^4.5.0",
 		"@typescript-eslint/parser": "^4.5.0",
+		"@vue/cli-plugin-typescript": "^4.5.8",
 		"eslint": "^7.11.0",
 		"lerna": "^3.22.1",
 		"tsc": "^1.20150623.0",

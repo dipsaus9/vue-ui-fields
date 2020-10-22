@@ -1,7 +1,7 @@
 {
-	"name": "@vue-ui-fields/utils",
-	"version": "0.0.1",
-	"description": "Core of UI Fields",
+	"name": "vue-ui-fields",
+	"version": "5.0.0-alpha.1",
+	"description": "Core of Vue UI Fields",
 	"author": "Dennis <dennis.spierenburg@hotmail.com>",
 	"homepage": "https://github.com/dipsaus9/vue-ui-fields#readme",
 	"license": "ISC",
@@ -25,6 +25,7 @@
 		"url": "https://github.com/dipsaus9/vue-ui-fields/issues"
 	},
 	"dependencies": {
+		"@vue-ui-fields/utils": "0.0.1",
 		"@vue-ui-fields/provider": "0.0.1"
 	},
 	"devDependencies": {

@@ -1,5 +1,5 @@
 {
-	"name": "@vue-ui-fields/core",
+	"name": "@vue-ui-fields/provider",
 	"version": "0.0.1",
 	"description": "Core of UI Fields",
 	"author": "Dennis <dennis.spierenburg@hotmail.com>",

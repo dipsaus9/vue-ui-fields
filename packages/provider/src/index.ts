@@ -11,7 +11,7 @@ export const getValuesSymbol = Symbol('UIFieldsGetValue');
 export const setValueSymbol = Symbol('UIFieldsSetValue');
 
 
-const UIFieldsProvider = defineComponent({
+const Provider = defineComponent({
 	render() {
 		if (!this.$slots.default) return;
 		return this.$slots.default();
@@ -51,4 +51,4 @@ const UIFieldsProvider = defineComponent({
 	}
 });
 
-export { UIFieldsProvider };
+export { Provider };

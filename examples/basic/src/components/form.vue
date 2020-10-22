@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { getValue, setValueGetter } from '@vue-ui-fields/utils';
+import { getValue, setValueGetter } from 'vue-ui-fields';
 
 export default {
 	setup() {
@@ -16,8 +16,8 @@ export default {
 		setter('Test setter');
 
 		return {
-			value
+			value,
 		};
-	}
+	},
 };
 </script>
